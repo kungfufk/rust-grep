@@ -10,17 +10,16 @@ if a.len() < 3 {
 let file = File::open(&a[2]);
 match file{
     Ok(mut file)=>{
-        let mut contents = String::new();
-        file.read_to_string(&mut contents);
-        let mut s=0;
-        for i in contents.lines(){
+    let mut contents = String::new();
+    match  file.read_to_string(&mut contents){
+    Ok(_)=>{
+    let mut s=0;
+    for i in contents.lines(){
             s+=1;
-            for j in i.split_whitespace(){
-            if j==a[1]{
+            if i.contains(&a[1]){
                 println!("{}:{}",s,i);
-                break;
-            }} 
-        }
+        } }},
+    Err(err)=>println!("Error happened: {}",err)
     }
     Err(err)=>println!("Error Happened: {}",err),
 
